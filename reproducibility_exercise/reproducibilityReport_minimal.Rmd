@@ -1,0 +1,140 @@
+---
+title: "Reproducibility Report: Maglio & Polman"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+-------
+
+For this exercise, please try to reproduce the results from Study 1 of the associated paper (Maglio & Polman, 2014). The PDF of the paper is included in the same folder as this Rmd file. 
+
+#### Methods summary: 
+
+Researchers recruited 202 volunteers at a subway station in Toronto, Ontario, Canada. Half of the sample was traveling East, while the other half was traveling West. In a 2 (orientation: toward, away from) X 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) design, each participant was randomly asked to estimate how far one of the four stations felt to them (1= very close, 7= very far). Authors conducted a 2 X 4 ANOVA on distance estimates, and then tested differences in distance estimates between East and West-bound groups for each individual station.
+
+------
+
+#### Target outcomes: 
+
+Below is the specific result you will attempt to reproduce (quoted directly from the results section of Study 1):
+
+> We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station, F(3, 194) = 24.10, p < .001, ηp 2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p < .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p < .001, ηp2 = .24). Figure 1 summarizes these results.
+
+------
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
+options(stringsAsFactors = FALSE)
+```
+
+# Step 1: Load packages
+
+```{r}
+library(tidyverse) # for data munging
+library(knitr) # for kable table formating
+library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
+library(readxl) # import excel files
+library(lsr)
+library(ggthemes)
+```
+
+# Step 2: Load data
+
+```{r}
+# Just Study 1
+d <- read_excel ("data/S1_Subway.xlsx")
+```
+
+# Step 3: Tidy data
+The data are already tidy as provided by the authors.
+
+# Step 4: Run analysis
+
+## Pre-processing
+You will notice that R doesn't recognize some of these variables as factors. So let's just factorize our variables before we proceed with the analyses.
+```{r}
+
+```
+
+## Inferential statistics
+
+> We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station, F(3, 194) = 24.10, p < .001, ηp 2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. 
+
+### First, check the number of observations for each condition
+```{r}
+
+```
+
+Looks pretty even to me!
+
+### Now run the model 
+When I see "analysis of variance" in the paper, my first thought is to use the `aov` function in R. This is a wrapper function that fits a linear model to the data.
+
+Note on statistics: the goal of this assignment is for you to get used to reproducing analyses. It is not intended to teach you about the subtleties of statistics; that will be covered in PSYC201B. We are happy to chat about these details in office hours, but do not worry if you do not understand them right now!
+
+```{r test1}
+
+```
+
+### Check your results against the instructional team
+Note: the values in the parentheses denote the degrees of freedom for the F-test.
+* Main effect of direction: F(1, 194) = 0.664
+* Main effect of station: F(3, 194) = 23.35
+* Interaction between direction and station: F(3,194) = 16.28
+
+Note from instructors: We're unclear as to why the F-values are slightly different from those in the paper. But students in previous versions of this class came to the same answer.
+
+### Effect size
+Use the `etaSquared()` function to obtain the partial eta-squared (under the `eta.sq.part` column). Do your results match the original paper? Hint: they should!
+```{r}
+
+```
+### Station-specific analyses
+
+> We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p < .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p < .001, ηp2 = .24). Figure 1 summarizes these results.
+
+#### St. George
+```{r st-george}
+## reproduce the findings for St. George
+
+```
+
+#### Spadina
+```{r spadina}
+## do the same for Spadina
+
+
+```
+
+#### Bloor-Yonge
+```{r bloor-yonge}
+## do the same for Bloor-Yonge
+
+```
+
+#### Sherbourne
+```{r sherbourne}
+## do the same for Sherbourne
+```
+
+# Step 5: Reflection
+
+Were you able to reproduce the results you attempted to reproduce? If not, what part(s) were you unable to reproduce?
+
+> ANSWER HERE
+
+How difficult was it to reproduce your results? 
+
+> ANSWER HERE
+
+What aspects made it difficult? What aspects made it easy?
+
+> ANSWER HERE
+
+
+# Bonus: Reproduce Fig 1
+```{r}
+
+```
